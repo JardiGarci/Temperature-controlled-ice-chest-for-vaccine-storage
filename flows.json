@@ -1,0 +1,485 @@
+[
+    {
+        "id": "c9063686e156c675",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1f904f7b3d72a801",
+        "type": "mqtt in",
+        "z": "c9063686e156c675",
+        "name": "",
+        "topic": "TempHum",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9bc249cd3abeb8b3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 420,
+        "wires": [
+            [
+                "f936377c5696a60f"
+            ]
+        ]
+    },
+    {
+        "id": "0c4ff52747c8c239",
+        "type": "change",
+        "z": "c9063686e156c675",
+        "name": "Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.Temperatura",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 160,
+        "wires": [
+            [
+                "897c27401d7e3492",
+                "ac33830b6b29338c"
+            ]
+        ]
+    },
+    {
+        "id": "af69bbca594e55bd",
+        "type": "change",
+        "z": "c9063686e156c675",
+        "name": "Humidity ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.Humedad",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 220,
+        "wires": [
+            [
+                "982390adf68e6ade",
+                "481e546dab9f777c"
+            ]
+        ]
+    },
+    {
+        "id": "982390adf68e6ade",
+        "type": "ui_chart",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Humedad",
+        "group": "Contenedor 1",
+        "order": "4",
+        "interpolate": "linear",
+        "nodata": "",
+        "removeOlder": 1,
+        "removeOlderUnit": "86400",
+        "x": 740,
+        "y": 260,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "897c27401d7e3492",
+        "type": "ui_chart",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Temperatura",
+        "group": "Contenedor 1",
+        "order": "2",
+        "interpolate": "linear",
+        "nodata": "",
+        "removeOlder": 1,
+        "removeOlderUnit": "86400",
+        "x": 750,
+        "y": 160,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "481e546dab9f777c",
+        "type": "ui_gauge",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Humedad",
+        "group": "Contenedor 1",
+        "order": "3",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "x": 740,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "f936377c5696a60f",
+        "type": "switch",
+        "z": "c9063686e156c675",
+        "name": "",
+        "property": "msg.payload.N_hielera",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 290,
+        "y": 420,
+        "wires": [
+            [
+                "0c4ff52747c8c239",
+                "af69bbca594e55bd"
+            ],
+            [
+                "10c093b01957aeed",
+                "0cb532e7f51307af"
+            ],
+            [
+                "189140e9a2bc9d61",
+                "97b86e98a07ad964"
+            ]
+        ]
+    },
+    {
+        "id": "10c093b01957aeed",
+        "type": "change",
+        "z": "c9063686e156c675",
+        "name": "Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.Temperatura",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 400,
+        "wires": [
+            [
+                "09720639fb8a9f74",
+                "cb6889782504338f"
+            ]
+        ]
+    },
+    {
+        "id": "0cb532e7f51307af",
+        "type": "change",
+        "z": "c9063686e156c675",
+        "name": "Humidity ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.Humedad",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 460,
+        "wires": [
+            [
+                "7b682e01f375a9d7",
+                "0fadc0a8c5814040"
+            ]
+        ]
+    },
+    {
+        "id": "189140e9a2bc9d61",
+        "type": "change",
+        "z": "c9063686e156c675",
+        "name": "Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.Temperatura",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 600,
+        "wires": [
+            [
+                "4ca07d313a074adc",
+                "4525161d4252c314"
+            ]
+        ]
+    },
+    {
+        "id": "97b86e98a07ad964",
+        "type": "change",
+        "z": "c9063686e156c675",
+        "name": "Humidity ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.Humedad",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 660,
+        "wires": [
+            [
+                "8c200ab3dd01c6f8",
+                "71120b12e1569046"
+            ]
+        ]
+    },
+    {
+        "id": "0fadc0a8c5814040",
+        "type": "ui_chart",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Humedad",
+        "group": "Contenedor 2",
+        "order": "4",
+        "interpolate": "linear",
+        "nodata": "",
+        "removeOlder": 1,
+        "removeOlderUnit": "86400",
+        "x": 740,
+        "y": 480,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "09720639fb8a9f74",
+        "type": "ui_gauge",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Temperatura",
+        "group": "Contenedor 2",
+        "order": "1",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "30",
+        "x": 750,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "cb6889782504338f",
+        "type": "ui_chart",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Temperatura",
+        "group": "Contenedor 2",
+        "order": "2",
+        "interpolate": "linear",
+        "nodata": "",
+        "removeOlder": 1,
+        "removeOlderUnit": "86400",
+        "x": 750,
+        "y": 380,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "7b682e01f375a9d7",
+        "type": "ui_gauge",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Humedad",
+        "group": "Contenedor 2",
+        "order": "3",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "x": 740,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "71120b12e1569046",
+        "type": "ui_chart",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Humedad",
+        "group": "Contenedor 3",
+        "order": "4",
+        "interpolate": "linear",
+        "nodata": "",
+        "removeOlder": 1,
+        "removeOlderUnit": "86400",
+        "x": 740,
+        "y": 700,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "4ca07d313a074adc",
+        "type": "ui_gauge",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Temperatura",
+        "group": "Contenedor 3",
+        "order": "1",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "30",
+        "x": 750,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "4525161d4252c314",
+        "type": "ui_chart",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Temperatura",
+        "group": "Contenedor 3",
+        "order": "2",
+        "interpolate": "linear",
+        "nodata": "",
+        "removeOlder": 1,
+        "removeOlderUnit": "86400",
+        "x": 750,
+        "y": 600,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "8c200ab3dd01c6f8",
+        "type": "ui_gauge",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Humedad",
+        "group": "Contenedor 3",
+        "order": "3",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "x": 740,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "ac33830b6b29338c",
+        "type": "ui_gauge",
+        "z": "c9063686e156c675",
+        "tab": "d8f495e77f2cf00d",
+        "name": "Temperatura",
+        "group": "Contenedor 1",
+        "order": "1",
+        "format": "{{value}}",
+        "min": "2",
+        "max": "8",
+        "x": 750,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9bc249cd3abeb8b3",
+        "type": "mqtt-broker",
+        "name": "Rasp",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d8f495e77f2cf00d",
+        "type": "ui_tab",
+        "name": "Graphs",
+        "icon": "dashboard",
+        "order": "1"
+    }
+]

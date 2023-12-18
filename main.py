@@ -7,6 +7,9 @@ clientId = "Contenedor 1"
 port = 1883
 host = "localhost"
 
+limite_inferior = 2
+limite_superior = 8
+
 client = mqtt.Client(clientId)
 client.connect(host)
 
@@ -15,31 +18,26 @@ main = project()
 
 # Diccionario Python
 cliente = {
-    "N_hielera": 1
+    "N_hielera": 1,
+    "vmin": limite_inferior,
+    "vmax" : limite_superior
 }
 
-# Obtener una cadena de caracteres JSON
 
 
 
 while True:
-    main.led_on('verde')
-    humidity, temperature = main.read()
-    # dic = {"Humedad" : humidity,"Temperatura" : temperature}
-    # dic = json.loads(str(dic))
-    # humidity, temperature = main.control_temp(2,8)
+
+    # Lectura del sensor
+    humidity, temperature = main.control_temp(2,8)
+
+    # Escritura en la lcd
     main.lcd_write(f"Temp : {temperature} C  \nHumedad : {humidity} %")
-    # client.publish("temperatura", f"Temp : {temperature} C  \nHumedad : {humidity} %")
-    # client.publish("temperatura", f'{humidity},{temperature}')
 
-    # client.publish("temperatura", temperature)
-    # client.publish("humedad", humidity)
-
+    # Envío de información por mqtt
     cliente["Temperatura"] = temperature
     cliente["Humedad"] = humidity
-    
     cliente_JSON = json.dumps(cliente)
-    client.publish("pruebas", cliente_JSON)
+    client.publish("TempHum", cliente_JSON)
 
-    # main.lcd_write(f"T : {temperature} C  \n H : {humidity} %")
     time.sleep(1)

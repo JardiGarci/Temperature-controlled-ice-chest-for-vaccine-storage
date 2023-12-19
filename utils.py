@@ -3,21 +3,19 @@ import digitalio
 import adafruit_character_lcd.character_lcd as characterlcd
 import Adafruit_DHT
 from gpiozero import LED
-# import time
-
 
 class project():
-    def __init__(self) -> None:
+    def __init__(self, pin_DTH = 14, pin_led_rojo = 7, pin_led_amarillo = 1, pin_led_verde = 12):
 
         ## Configuración sensor de temperatura y humedad
         self.sensor_DTH11 = Adafruit_DHT.DHT11
-        self.pin_DTH = 14
+        self.pin_DTH = pin_DTH
 
         ## Configuración LEDs
         self.leds = {
-                            "rojo": LED(7),
-                            "amarillo": LED(1),
-                            "verde": LED(12)
+                            "rojo": LED(pin_led_rojo),
+                            "amarillo": LED(pin_led_amarillo),
+                            "verde": LED(pin_led_verde)
                         }
 
         ## Configuración de lcd
@@ -64,11 +62,3 @@ class project():
             # print('rojo')
             self.led_on('rojo')
         return humidity, temperature
-
-# main = project()
-
-# while True:
-#     main.led_on('verde')
-#     humidity, temperature = main.read()
-#     main.lcd_write(f"Temp : {temperature} C  \nHumedad : {humidity} %")
-#     time.sleep(1)

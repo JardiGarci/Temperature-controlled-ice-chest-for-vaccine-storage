@@ -1,30 +1,30 @@
+# Importación de librerías
 from utils import project
 import time
 import paho.mqtt.client as mqtt
 import json
 
+# Configuración de mqtt
 clientId = "Contenedor 1"
 port = 1883
 host = "localhost"
-
-limite_inferior = 2
-limite_superior = 8
-
 client = mqtt.Client(clientId)
 client.connect(host)
 
+# Limites de temperatura y número de hielera
+limite_inferior = 2
+limite_superior = 8
+numero_hielera = 1
 
+# Importando sensores y actuadores del proyecto
 main = project()
 
 # Diccionario Python
 cliente = {
-    "N_hielera": 1,
+    "N_hielera": numero_hielera,
     "vmin": limite_inferior,
     "vmax" : limite_superior
 }
-
-
-
 
 while True:
 

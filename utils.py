@@ -72,3 +72,35 @@ class project():
             self.led_off('verde')
             self.led_off('amarillo')
         return humidity, temperature
+
+class contenedor_virtual():
+    def __init__(self,numero_hielera = 2,limite_temperatura = [27,0],limite_humedad = [30,80], muestras = 1000) -> None:
+        self.limite_temperatura = limite_temperatura
+        self.temp = list(np.linspace(limite_temperatura[0],limite_temperatura[1],int(muestras/2)))
+        self.temp += list(reversed(self.temp))
+        self.numero = numero_hielera
+
+        self.hum = list(np.linspace(limite_humedad[0],limite_humedad[1],int(muestras/2)))
+        self.hum += list(reversed(self.hum))
+
+        self.contador = -1
+        
+    def lectura(self):
+        self.contador += 1
+        try:
+            temperatura = int(self.temp[self.contador])
+            humedad = int(self.hum[self.contador])
+        except:
+            self.contador = 0
+            temperatura = int(self.temp[self.contador])
+            humedad = int(self.hum[self.contador])
+
+        cliente = {
+            "N_hielera": self.numero,
+            "vmin": 2,
+            "vmax" : 8,
+            "Temperatura" : temperatura,
+            "Humedad" : humedad
+        }
+            
+        return cliente

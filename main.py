@@ -1,5 +1,5 @@
 # Importación de librerías
-from utils import project
+from utils import project, contenedor_virtual
 import time
 import paho.mqtt.client as mqtt
 import json
@@ -21,11 +21,14 @@ numero_hielera = 1
 main = project()
 
 # Diccionario Python
-cliente = {
+cliente1 = {
     "N_hielera": numero_hielera,
     "vmin": limite_inferior,
     "vmax" : limite_superior
 }
+
+contenedor_virtual_2 = contenedor_virtual(2)
+contenedor_virtual_3 = contenedor_virtual(3)
 
 # main.lcd_write('Hola')
 # main.led_on('verde')
@@ -39,10 +42,17 @@ while True:
     main.lcd_write(f"Temp : {temperature} C  \nHumedad : {humidity} %")
 
     # Envío de información por mqtt
-    cliente["Temperatura"] = temperature
-    cliente["Humedad"] = humidity
-    cliente_JSON = json.dumps(cliente)
+    cliente1["Temperatura"] = temperature
+    cliente1["Humedad"] = humidity
+    cliente_JSON = json.dumps(cliente1)
     client.publish("TempHum", cliente_JSON)
+
+    cliente_JSON2 = json.dumps(contenedor_virtual_2.lectura())
+    client.publish("TempHum", cliente_JSON2)
+
+    cliente_JSON3 = json.dumps(contenedor_virtual_3.lectura())
+    client.publish("TempHum", cliente_JSON3)
+
     #Conexion al localhost de mariadb
     '''db = pymysql.connect(host="localhost", user="root", password="team7mariadb", db="proyecto_equipo7test", charset="utf8mb4")
     try:

@@ -128,11 +128,11 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE  PROCEDURE `inserta_dato`(in datatimep timestamp ,in tempp float
+CREATE  PROCEDURE `inserta_dato2`(in id_contenedorp int ,in tempp float
 ,in humidp float)
 BEGIN
-insert into temperatura (datatimep,temp,humid)
-values(datatimep,tempp,humidp);
+insert into temperatura (id_contenedor,datatime,temp,humid)
+values(id_contenedorp,DEFAULT,tempp,humidp);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

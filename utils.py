@@ -39,6 +39,8 @@ class project():
 
     def led_on(self, color):
         self.leds[color].on()
+    def led_off(self,color):
+        self.leds[color].off()
 
     def read(self):
         humidity, temperature = Adafruit_DHT.read_retry(self.sensor_DTH11, self.pin_DTH)
@@ -51,14 +53,22 @@ class project():
     def control_temp(self, lim_down, lim_up):
 
         humidity, temperature = self.read()
+        # print(humidity)
+        # print(temperature)
         umbral = (lim_up - lim_down) / 3
         if (lim_down + umbral) <= temperature <= (lim_up - umbral):
             # print('verde')
             self.led_on('verde')
+            self.led_off('amarillo')
+            self.led_off('rojo')
         elif (lim_down) <= temperature < (lim_down + umbral) or (lim_up - umbral) < temperature <= (lim_up):
             # print('amarillo')
             self.led_on('amarillo')
+            self.led_off('verde')
+            self.led_off('rojo')
         else:
             # print('rojo')
             self.led_on('rojo')
+            self.led_off('verde')
+            self.led_off('amarillo')
         return humidity, temperature
